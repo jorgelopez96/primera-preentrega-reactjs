@@ -1,0 +1,18 @@
+.cart-widget {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-icon {
+  font-size: 22px;
+}
+
+.cart-badge {
+  background: #111;
+  color: white;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  line-height: 1.2;
+}

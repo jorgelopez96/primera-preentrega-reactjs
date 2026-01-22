@@ -1,0 +1,19 @@
+.item-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.item-count button {
+  padding: 0.3rem 0.7rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.item-count span {
+  font-size: 1rem;
+  min-width: 24px;
+  text-align: center;
+}
