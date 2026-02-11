@@ -1,7 +1,7 @@
 import "../assets/css/CartWidget.css";
 
 const CartWidget = () => {
-  const cantidad = 3; // Numero de ejemplo
+  const cantidad = 0; // Numero de ejemplo
 
   return (
     <div className="cart-widget" aria-label="Carrito">

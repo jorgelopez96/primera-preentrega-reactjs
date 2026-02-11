@@ -1,0 +1,62 @@
+/* Marca */
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+
+.footer-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.footer-brand:hover .footer-logo {
+  transform: translateY(-2px) rotate(-6deg) scale(1.05);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
+}
+
+.footer-brand__name {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.footer-brand__sub {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* Nav a la derecha */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  justify-content: flex-end; /* ✅ más a la derecha */
+}
+
+/* En mobile queda centrado para que no se rompa */
+@media (max-width: 767px) {
+  .footer-nav {
+    justify-content: center;
+  }
+}
+
+/* Links */
+.footer-link {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-weight: 600;
+  transition:
+    transform 160ms ease,
+    color 160ms ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}

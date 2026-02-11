@@ -1,0 +1,147 @@
+/* Contenedor del carrusel */
+.osi-carousel {
+  position: relative;
+}
+
+.osi-carousel .carousel-control-prev,
+.osi-carousel .carousel-control-next {
+  width: 56px;
+  opacity: 1;
+}
+
+.osi-carousel .carousel-control-prev-icon,
+.osi-carousel .carousel-control-next-icon {
+  width: 42px;
+  height: 42px;
+
+  background-color: rgba(0, 0, 0, 0.65);
+  border-radius: 999px;
+
+  background-size: 55% 55%;
+  background-position: center;
+}
+
+.osi-carousel .carousel-control-prev-icon,
+.osi-carousel .carousel-control-next-icon {
+  filter: none;
+}
+
+.osi-carousel .carousel-control-prev-icon,
+.osi-carousel .carousel-control-next-icon {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.osi-carousel .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.osi-slide-card {
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.osi-slide-left {
+  background: linear-gradient(135deg, #111, #2b2b2b);
+  min-height: 240px;
+}
+
+.osi-new-carousel {
+  position: relative;
+}
+
+.osi-new-card {
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.osi-new-left {
+  min-height: 260px;
+  background:
+    radial-gradient(
+      1200px 380px at 10% 0%,
+      rgba(109, 40, 217, 0.35),
+      transparent 55%
+    ),
+    linear-gradient(135deg, #0b1220, #1f2937);
+}
+
+.osi-new-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-weight: 700;
+}
+
+.osi-new-title {
+  letter-spacing: 0.2px;
+}
+
+.osi-new-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  line-clamp: 3;
+
+  -webkit-line-clamp: 3;
+
+  overflow: hidden;
+}
+
+.osi-new-price {
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.osi-new-carousel .carousel-control-prev,
+.osi-new-carousel .carousel-control-next {
+  width: 54px;
+  opacity: 1;
+}
+
+.osi-new-carousel .carousel-control-prev-icon,
+.osi-new-carousel .carousel-control-next-icon {
+  width: 42px;
+  height: 42px;
+  background-color: rgba(15, 23, 42, 0.65);
+  border-radius: 999px;
+  background-size: 55% 55%;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.osi-new-carousel .carousel-indicators {
+  margin-bottom: -6px;
+}
+
+.osi-new-carousel .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.osi-new-thumb {
+  height: 170px;
+  background:
+    radial-gradient(
+      900px 240px at 10% 0%,
+      rgba(109, 40, 217, 0.35),
+      transparent 55%
+    ),
+    linear-gradient(135deg, #0b1220, #1f2937);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+@media (max-width: 767px) {
+  .osi-new-thumb {
+    height: 150px;
+  }
+}

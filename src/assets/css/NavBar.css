@@ -1,23 +1,157 @@
-.nav-container {
-  background-color: rgb(189, 130, 244);
-  padding: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.osi-navbar {
+  background: rgba(237, 233, 254, 0.75); /* violet-100 con transparencia */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1200;
 }
 
-.nav-links {
+/* Marca */
+.osi-brand {
   display: flex;
-  gap: 2rem;
   align-items: center;
+  gap: 10px;
+  letter-spacing: 0.2px;
 }
 
-.anchor-nav {
-  font-weight: bold;
-  text-decoration: none;
-  font-family:
-    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+.osi-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--violet-700), var(--violet-600));
+  color: white;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.osi-brand-name {
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.osi-brand-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Links */
+.osi-link.nav-link,
+.osi-link {
+  color: var(--ink) !important;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.45rem 0.65rem;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.osi-link:hover {
+  background: rgba(124, 58, 237, 0.12); /* violeta suave */
+  color: var(--violet-700) !important;
+}
+
+.osi-link.active {
+  background: rgba(109, 40, 217, 0.16);
+  color: var(--violet-700) !important;
+}
+
+/* Buscador */
+.nav-search-wrap {
+  position: relative;
+  min-width: 340px;
+}
+
+.osi-search-input.form-control {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.8rem;
+}
+
+.osi-search-input.form-control:focus {
+  border-color: rgba(109, 40, 217, 0.45);
+  box-shadow: 0 0 0 0.2rem rgba(109, 40, 217, 0.15);
+}
+
+/* Botón buscar */
+.osi-btn-search {
+  border-radius: 12px;
+  background: var(--violet-700);
+  border: 1px solid var(--violet-700);
+  font-weight: 700;
+}
+
+.osi-btn-search:hover {
+  background: var(--violet-600);
+  border-color: var(--violet-600);
+}
+
+/* Dropdown sugerencias */
+.nav-suggestions {
+  position: absolute;
+  top: 52px;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 1050;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.12);
+}
+
+.nav-suggestion {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: 0;
+  background: white;
   cursor: pointer;
-  color: black;
+  transition: background 120ms ease;
+}
+
+.nav-suggestion:hover {
+  background: rgba(109, 40, 217, 0.08);
+}
+
+.nav-suggestion__title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.nav-suggestion__meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ✅ Toggler (hamburguesa) SIN cuadrado/borde */
+.navbar-toggler {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 6px;
+  border-radius: 12px; /* mantiene forma si algún navegador agrega fondo */
+}
+
+.navbar-toggler:focus {
+  box-shadow: none !important;
+}
+
+/* Color de los 3 palitos (icono) */
+.navbar-toggler-icon {
+  filter: invert(20%);
+}
+
+.osi-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
