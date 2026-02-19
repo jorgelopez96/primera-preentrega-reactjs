@@ -58,7 +58,7 @@ const Home = () => {
 
       <section className="container my-4">
         <div className="d-flex align-items-center mb-2">
-          <h3 className="mb-0">🔥 Ofertas</h3>
+          <h3 className="mb-0">Ofertas</h3>
         </div>
 
         {offers.length === 0 ? (

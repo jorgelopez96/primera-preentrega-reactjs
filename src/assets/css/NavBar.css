@@ -93,7 +93,7 @@
   border-color: var(--violet-600);
 }
 
-/* Dropdown sugerencias */
+/* Sugerencias */
 .nav-suggestions {
   position: absolute;
   top: 52px;
@@ -133,12 +133,12 @@
   margin-top: 2px;
 }
 
-/* ✅ Toggler (hamburguesa) SIN cuadrado/borde */
+/*Toggler*/
 .navbar-toggler {
   border: none !important;
   box-shadow: none !important;
   padding: 6px;
-  border-radius: 12px; /* mantiene forma si algún navegador agrega fondo */
+  border-radius: 12px;
 }
 
 .navbar-toggler:focus {

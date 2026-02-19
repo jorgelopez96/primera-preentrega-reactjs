@@ -36,10 +36,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px 18px;
-  justify-content: flex-end; /* ✅ más a la derecha */
+  justify-content: flex-end;
 }
 
-/* En mobile queda centrado para que no se rompa */
+
 @media (max-width: 767px) {
   .footer-nav {
     justify-content: center;
