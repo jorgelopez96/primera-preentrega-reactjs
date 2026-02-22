@@ -1,15 +1,38 @@
 import ItemCount from "./ItemCount";
+import { useCart } from "../context/CartContext";
 
 const ItemDetail = ({ item }) => {
+  const { addItem } = useCart();
+
+  const handleAdd = (qty) => {
+    addItem(item, qty);
+  };
+
+  const stock = item.stock ?? 0; // stock 
+
   return (
     <div className="container my-4">
       <div className="row g-4 align-items-start">
         <div className="col-12 col-md-5">
           <div className="card shadow-sm">
-            <div className="card-body">
-              <div className="ratio ratio-4x3 bg-light d-flex align-items-center justify-content-center">
-                <span className="text-muted">Imagen</span>
-              </div>
+            <div className="card-body d-flex align-items-center justify-content-center">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="img-fluid rounded"
+                  style={{
+                    maxHeight: "350px",
+                    objectFit: "contain",
+                    backgroundColor: "#f8f9fa",
+                    padding: "15px",
+                  }}
+                />
+              ) : (
+                <div className="ratio ratio-4x3 bg-light d-flex align-items-center justify-content-center w-100">
+                  <span className="text-muted">Imagen</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -20,22 +43,24 @@ const ItemDetail = ({ item }) => {
 
           <p className="fs-4 fw-bold mb-2">${item.price}</p>
 
-          <p className="mb-1">
-            <span className="badge text-bg-secondary me-2">
-              {item.category}
-            </span>
-            {item.platform && (
-              <span className="badge text-bg-info">{item.platform}</span>
-            )}
-          </p>
-
           <hr />
 
           <p className="mb-2 fw-semibold">Seleccioná cantidad:</p>
 
           <div className="d-inline-block">
-            <ItemCount />
+            <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
           </div>
+
+          {/* Stock visible */}
+          <p className="text-muted small mt-2 mb-0">
+            Stock disponible: <b>{stock}</b>
+          </p>
+
+          {stock === 0 && (
+            <div className="alert alert-warning mt-3 mb-0" role="alert">
+              Este producto está <b>sin stock</b> por el momento.
+            </div>
+          )}
         </div>
       </div>
     </div>

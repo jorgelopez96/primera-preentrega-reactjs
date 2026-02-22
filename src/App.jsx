@@ -9,34 +9,40 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import SearchResultsContainer from "./components/SearchResultsContainer";
 import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
+import CartView from "./components/CartView";
 
 function App() {
   return (
     <BrowserRouter>
       <NavBar />
 
-      <Routes>
-        {/*HOME */}
-        <Route path="/" element={<Home />} />
+      <main className="flex-grow-1">
+        <Routes>
+          {/* HOME */}
+          <Route path="/" element={<Home />} />
 
-        {/*CATEGORÍAS */}
-        <Route
-          path="/category/:categoryId"
-          element={<ItemListContainer greeting="Catálogo por categoría" />}
-        />
+          {/* CATEGORIAS GRID */}
+          <Route path="/categories" element={<Categories />} />
 
-        {/*DETALLE */}
-        <Route path="/item/:itemId" element={<ItemDetailContainer />} />
+          {/* CATALOGO POR CATEGORIA */}
+          <Route
+            path="/category/:categoryId"
+            element={<ItemListContainer greeting="Catálogo por categoría" />}
+          />
 
-        {/*BUSCADOR */}
-        <Route path="/search" element={<SearchResultsContainer />} />
+          {/* DETALLE */}
+          <Route path="/item/:itemId" element={<ItemDetailContainer />} />
 
-        {/* 404 */}
-        <Route path="*" element={<NotFound />} />
+          {/* BUSCADOR */}
+          <Route path="/search" element={<SearchResultsContainer />} />
 
-        {/* Categorias */}
-        <Route path="/categories" element={<Categories />} />
-      </Routes>
+          {/* CARRITO */}
+          <Route path="/cart" element={<CartView />} />
+
+          {/* 404 SIEMPRE ÚLTIMA */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
 
       <Footer />
     </BrowserRouter>

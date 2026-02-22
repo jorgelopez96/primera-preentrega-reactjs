@@ -1,15 +1,18 @@
 import "../assets/css/CartWidget.css";
+import { useCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 const CartWidget = () => {
-  const cantidad = 0; // Numero de ejemplo
+  const { totalItems } = useCart();
 
   return (
-    <div className="cart-widget" aria-label="Carrito">
-      <span className="cart-icon" role="img" aria-label="icono carrito">
-        🛒
-      </span>
-      <span className="cart-badge">{cantidad}</span>
-    </div>
+    <Link to="/cart" className="text-decoration-none">
+      <div className="cart-widget d-flex align-items-center position-relative">
+        <i className="bi-cart3 cart-icon" style={{ fontSize: "1.5rem" }}></i>
+
+        {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+      </div>
+    </Link>
   );
 };
 

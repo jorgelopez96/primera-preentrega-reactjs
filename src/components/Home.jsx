@@ -120,7 +120,16 @@ const Home = () => {
                       <div key={p.id} className="col-12 col-md-4">
                         <div className="card shadow-sm osi-new-card h-100">
                           <div className="osi-new-thumb d-flex align-items-center justify-content-center">
-                            <span className="text-white-50">Imagen</span>
+                            {p.image ? (
+                              <img
+                                src={p.image}
+                                alt={p.title}
+                                className="osi-new-thumb__img"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <span className="text-white-50">Imagen</span>
+                            )}
                           </div>
 
                           <div className="card-body d-flex flex-column">

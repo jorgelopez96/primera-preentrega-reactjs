@@ -154,9 +154,23 @@ const NavBar = () => {
                     type="button"
                     onClick={() => goToItem(p.id)}
                   >
-                    <div className="nav-suggestion__title">{p.title}</div>
-                    <div className="nav-suggestion__meta">
-                      ${p.price} · {p.category}
+                    {/* Miniatura en el buscador*/}
+                    <div className="nav-suggestion__thumb">
+                      {p.image ? (
+                        <img src={p.image} alt={p.title} />
+                      ) : (
+                        <span className="nav-suggestion__thumb-placeholder">
+                          Img
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Texto */}
+                    <div className="nav-suggestion__content">
+                      <div className="nav-suggestion__title">{p.title}</div>
+                      <div className="nav-suggestion__meta">
+                        ${p.price} · {p.category}
+                      </div>
                     </div>
                   </button>
                 ))}
