@@ -28,12 +28,29 @@ const CartView = () => {
 
   const [submitting, setSubmitting] = useState(false);
 
+  const [toast, setToast] = useState({
+    show: false,
+    type: "success",
+    title: "",
+    message: "",
+  });
+
   useEffect(() => {
     if (cart.length === 0) {
       setShow(false);
       setConfirmClear(false);
     }
   }, [cart.length]);
+
+  useEffect(() => {
+    if (!toast.show) return;
+
+    const timer = setTimeout(() => {
+      setToast((prev) => ({ ...prev, show: false }));
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [toast.show]);
 
   const itemsSummary = useMemo(() => {
     return cart
@@ -57,7 +74,12 @@ const CartView = () => {
     e.preventDefault();
 
     if (!buyer.name.trim() || !buyer.email.trim() || !buyer.phone.trim()) {
-      alert("Completá nombre, email y teléfono.");
+      setToast({
+        show: true,
+        type: "danger",
+        title: "Faltan datos",
+        message: "Completá nombre, email y teléfono.",
+      });
       return;
     }
 
@@ -82,22 +104,23 @@ const CartView = () => {
 
       const orderId = await createOrder(order);
 
-      alert(
-        `✅ Compra confirmada!\n\n` +
-          `ID de la orden: ${orderId}\n` +
-          `Cliente: ${buyer.name}\n` +
-          `Email: ${buyer.email}\n` +
-          `Tel: ${buyer.phone}\n\n` +
-          `Productos: ${totalItems}\n` +
-          `Total: $${totalPrice}\n\n` +
-          `Detalle: ${itemsSummary}${cart.length > 6 ? "..." : ""}`,
-      );
+      setToast({
+        show: true,
+        type: "success",
+        title: "Compra realizada",
+        message: `ID de orden: ${orderId}`,
+      });
 
       clearCart();
       closeModal();
       navigate("/");
     } catch (error) {
-      alert("Ocurrió un error al generar la orden. Intentá de nuevo.");
+      setToast({
+        show: true,
+        type: "danger",
+        title: "Error",
+        message: "Ocurrió un error al generar la orden. Intentá de nuevo.",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -470,6 +493,35 @@ const CartView = () => {
             </div>
           </div>
         </>
+      )}
+
+      {toast.show && (
+        <div
+          className="toast-container position-fixed bottom-0 end-0 p-3"
+          style={{ zIndex: 2000 }}
+        >
+          <div
+            className={`toast show border-0 text-white bg-${toast.type}`}
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="d-flex">
+              <div className="toast-body">
+                <strong>{toast.title}</strong>
+                <br />
+                {toast.message}
+              </div>
+
+              <button
+                type="button"
+                className="btn-close btn-close-white me-2 m-auto"
+                aria-label="Close"
+                onClick={() => setToast((prev) => ({ ...prev, show: false }))}
+              />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
