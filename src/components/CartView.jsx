@@ -115,7 +115,7 @@ const CartView = () => {
 
       closeModal();
 
-      navigate("/checkout-success", { state: successData });
+      navigate("/checkout-processing", { state: successData });
 
       setTimeout(() => {
         clearCart();

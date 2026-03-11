@@ -11,6 +11,7 @@ import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
 import CartView from "./components/CartView";
 import CheckoutSuccess from "./components/CheckoutSuccess";
+import CheckoutProcessing from "./components/CheckoutProcessing";
 
 function App() {
   return (
@@ -40,7 +41,10 @@ function App() {
           {/* CARRITO */}
           <Route path="/cart" element={<CartView />} />
 
-          {/* COMPRA EXITOSA */}
+          {/* PANTALLA GRANDE DE EXITO */}
+          <Route path="/checkout-processing" element={<CheckoutProcessing />} />
+
+          {/* RESUMEN FINAL */}
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
 
           {/* 404 */}
