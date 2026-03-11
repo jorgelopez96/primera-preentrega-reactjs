@@ -1,16 +1,175 @@
-# React + Vite
+# OSIDISTECH E-Commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyecto final del curso **React JS - CoderHouse**.
 
-Currently, two official plugins are available:
+OSIDISTECH es una Single Page Application de e-commerce desarrollada con React que permite navegar un catálogo de hardware, ver el detalle de productos, agregarlos al carrito y generar una orden de compra almacenada en Firebase Firestore.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+# Demo del proyecto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*(Opcional si haces deploy en Vercel o Netlify)*
 
-## Expanding the ESLint configuration
+Demo online:
+https://tu-link-deploy.com
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Tecnologías utilizadas
+
+- React
+- React Router DOM
+- Context API
+- Firebase
+- Firestore Database
+- Bootstrap
+- Vite
+
+---
+
+# Funcionalidades
+
+✔ Navegación SPA sin recargar la página  
+✔ Navegación por categorías  
+✔ Vista de detalle de producto  
+✔ Selector de cantidad con validación de stock  
+✔ Carrito de compras global con Context API  
+✔ Modificar cantidades dentro del carrito  
+✔ Vaciar carrito  
+✔ Formulario de checkout  
+✔ Generación de orden de compra  
+✔ Almacenamiento de órdenes en Firestore  
+✔ Renderizado condicional con loaders  
+
+---
+
+# Estructura del proyecto
+
+
+src
+┣ components
+┃ ┣ CartView.jsx
+┃ ┣ CartWidget.jsx
+┃ ┣ Item.jsx
+┃ ┣ ItemCount.jsx
+┃ ┣ ItemDetail.jsx
+┃ ┣ ItemDetailContainer.jsx
+┃ ┣ ItemList.jsx
+┃ ┣ ItemListContainer.jsx
+┃ ┣ NavBar.jsx
+┃ ┗ Footer.jsx
+┣ context
+┃ ┗ CartContext.jsx
+┣ firebase
+┃ ┣ firebaseConfig.js
+┃ ┣ firestore.js
+┃ ┗ orders.js
+┣ assets
+┗ App.jsx
+
+
+---
+
+# Instalación del proyecto
+
+Clonar el repositorio:
+
+
+git clone https://github.com/tuusuario/ProyectoFinalApellido.git
+
+
+Entrar en la carpeta:
+
+
+cd ProyectoFinalApellido
+
+
+Instalar dependencias:
+
+
+npm install
+
+
+Ejecutar el proyecto:
+
+
+npm run dev
+
+
+Abrir en el navegador:
+
+
+http://localhost:5173
+
+
+---
+
+# Configuración de Firebase
+
+El proyecto utiliza **Firebase Firestore** como base de datos.
+
+Debes crear un archivo:
+
+
+src/firebase/firebaseConfig.js
+
+
+con la configuración de tu proyecto Firebase.
+
+Ejemplo:
+
+```javascript
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_PROJECT.firebaseapp.com",
+  projectId: "TU_PROJECT_ID",
+  storageBucket: "TU_PROJECT.appspot.com",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
+};
+
+const app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);
+Colecciones en Firestore
+products
+
+Contiene los productos del catálogo.
+
+Campos utilizados:
+
+title
+description
+price
+category
+image
+stock
+orders
+
+Se genera automáticamente cuando un usuario confirma una compra.
+
+Estructura:
+
+buyer
+  name
+  email
+  phone
+  address
+
+items
+  id
+  title
+  price
+  quantity
+
+total
+createdAt
+Autor
+
+Proyecto desarrollado por
+
+Jorge Manuel López Acevedo
+
+Curso: React JS
+Plataforma: CoderHouse
