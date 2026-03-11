@@ -107,13 +107,16 @@ const CartView = () => {
       setToast({
         show: true,
         type: "success",
-        title: "Compra realizada",
+        title: "Compra realizada con éxito",
         message: `ID de orden: ${orderId}`,
       });
 
       clearCart();
       closeModal();
-      navigate("/");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     } catch (error) {
       setToast({
         show: true,
