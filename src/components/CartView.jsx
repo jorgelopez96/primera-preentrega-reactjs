@@ -113,10 +113,13 @@ const CartView = () => {
         totalItems,
       };
 
-      clearCart();
       closeModal();
 
       navigate("/checkout-success", { state: successData });
+
+      setTimeout(() => {
+        clearCart();
+      }, 0);
     } catch (error) {
       setToast({
         show: true,
