@@ -86,13 +86,9 @@ const CheckoutSuccess = () => {
             </div>
           </div>
 
-          <div className="d-flex flex-wrap gap-2 justify-content-center mt-4">
+          <div className="d-flex justify-content-center mt-4">
             <Link to="/" className="btn osi-btn-search text-white">
               Volver al inicio
-            </Link>
-
-            <Link to="/categories" className="btn btn-outline-secondary">
-              Seguir comprando
             </Link>
           </div>
         </div>

@@ -30,7 +30,7 @@ const CartView = () => {
 
   const [toast, setToast] = useState({
     show: false,
-    type: "success",
+    type: "danger",
     title: "",
     message: "",
   });
@@ -105,13 +105,6 @@ const CartView = () => {
 
       const orderId = await createOrder(order);
 
-      setToast({
-        show: true,
-        type: "success",
-        title: "Compra realizada con éxito",
-        message: `ID de orden: ${orderId}`,
-      });
-
       const successData = {
         orderId,
         buyer: order.buyer,
@@ -123,9 +116,7 @@ const CartView = () => {
       clearCart();
       closeModal();
 
-      setTimeout(() => {
-        navigate("/checkout-success", { state: successData });
-      }, 2500);
+      navigate("/checkout-success", { state: successData });
     } catch (error) {
       setToast({
         show: true,
