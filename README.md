@@ -8,10 +8,7 @@ OSIDISTECH es una Single Page Application de e-commerce desarrollada con React q
 
 # Demo del proyecto
 
-*(Opcional si haces deploy en Vercel o Netlify)*
-
-Demo online:
-https://tu-link-deploy.com
+https://osidistech.vercel.app/
 
 # Tecnologías utilizadas
 
@@ -37,12 +34,11 @@ https://tu-link-deploy.com
 ✔ Formulario de checkout  
 ✔ Generación de orden de compra  
 ✔ Almacenamiento de órdenes en Firestore  
-✔ Renderizado condicional con loaders  
+✔ Renderizado condicional con loaders
 
 ---
 
 # Estructura del proyecto
-
 
 src
 ┣ components
@@ -65,40 +61,29 @@ src
 ┣ assets
 ┗ App.jsx
 
-
 ---
 
 # Instalación del proyecto
 
 Clonar el repositorio:
 
-
 git clone https://github.com/tuusuario/ProyectoFinalApellido.git
-
 
 Entrar en la carpeta:
 
-
 cd ProyectoFinalApellido
-
 
 Instalar dependencias:
 
-
 npm install
-
 
 Ejecutar el proyecto:
 
-
 npm run dev
-
 
 Abrir en el navegador:
 
-
 http://localhost:5173
-
 
 ---
 
@@ -108,9 +93,7 @@ El proyecto utiliza **Firebase Firestore** como base de datos.
 
 Debes crear un archivo:
 
-
 src/firebase/firebaseConfig.js
-
 
 con la configuración de tu proyecto Firebase.
 
@@ -173,3 +156,4 @@ Jorge Manuel López Acevedo
 
 Curso: React JS
 Plataforma: CoderHouse
+```
