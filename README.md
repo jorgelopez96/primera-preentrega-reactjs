@@ -1,77 +1,120 @@
-# OSIDISTECH E-Commerce
+🖥️ OSIDISTECH – Hardware Store
 
-Proyecto final del curso **React JS - CoderHouse**.
+Tienda online de hardware desarrollada con React, donde los usuarios pueden navegar productos, filtrarlos por categorías, buscarlos, agregarlos al carrito y finalizar la compra generando una orden almacenada en Firebase Firestore.
 
-OSIDISTECH es una Single Page Application de e-commerce desarrollada con React que permite navegar un catálogo de hardware, ver el detalle de productos, agregarlos al carrito y generar una orden de compra almacenada en Firebase Firestore.
-
----
-
-# Demo del proyecto
-
+🔗 Demo online:
 https://osidistech.vercel.app/
 
-# Tecnologías utilizadas
+📦 Características principales
 
-- React
-- React Router DOM
-- Context API
-- Firebase
-- Firestore Database
-- Bootstrap
-- Vite
+Catálogo de productos
 
----
+Navegación por categorías
 
-# Funcionalidades
+Buscador de productos
 
-✔ Navegación SPA sin recargar la página  
-✔ Navegación por categorías  
-✔ Vista de detalle de producto  
-✔ Selector de cantidad con validación de stock  
-✔ Carrito de compras global con Context API  
-✔ Modificar cantidades dentro del carrito  
-✔ Vaciar carrito  
-✔ Formulario de checkout  
-✔ Generación de orden de compra  
-✔ Almacenamiento de órdenes en Firestore  
-✔ Renderizado condicional con loaders
+Página de detalle del producto
 
----
+Carrito de compras
 
-# Estructura del proyecto
+Modificación de cantidades en el carrito
 
+Validación de stock
+
+Formulario de checkout
+
+Generación de orden de compra
+
+Almacenamiento de órdenes en Firebase Firestore
+
+Página de compra exitosa con resumen
+
+Notificaciones Toast
+
+Deploy en Vercel
+
+🛠️ Tecnologías utilizadas
+
+React
+
+React Router DOM
+
+Firebase Firestore
+
+Bootstrap 5
+
+Vite
+
+JavaScript (ES6+)
+
+📂 Estructura del proyecto
 src
 ┣ components
 ┃ ┣ CartView.jsx
-┃ ┣ CartWidget.jsx
-┃ ┣ Item.jsx
-┃ ┣ ItemCount.jsx
+┃ ┣ Categories.jsx
+┃ ┣ CheckoutSuccess.jsx
+┃ ┣ Home.jsx
 ┃ ┣ ItemDetail.jsx
 ┃ ┣ ItemDetailContainer.jsx
 ┃ ┣ ItemList.jsx
 ┃ ┣ ItemListContainer.jsx
 ┃ ┣ NavBar.jsx
+┃ ┣ SearchResultsContainer.jsx
 ┃ ┗ Footer.jsx
+┃
 ┣ context
 ┃ ┗ CartContext.jsx
+┃
 ┣ firebase
 ┃ ┣ firebaseConfig.js
 ┃ ┣ firestore.js
 ┃ ┗ orders.js
+┃
 ┣ assets
+┃ ┣ css
+┃ ┗ images
+┃
 ┗ App.jsx
 
----
+🛒 Flujo de compra
 
-# Instalación del proyecto
+1️⃣ El usuario navega por los productos
+2️⃣ Puede filtrar por categorías o buscar productos
+3️⃣ Agrega productos al carrito
+4️⃣ Modifica cantidades o elimina productos
+5️⃣ Completa el formulario de compra
+6️⃣ Se genera una orden en Firebase Firestore
+7️⃣ Se muestra una pantalla con el resumen de la compra
+
+🔥 Firebase
+
+Las órdenes de compra se almacenan en Cloud Firestore dentro de la colección:
+
+orders
+
+Cada orden contiene:
+
+Datos del comprador
+
+Productos comprados
+
+Cantidad
+
+Precio
+
+Total de la compra
+
+Fecha
+
+🚀 Instalación local
 
 Clonar el repositorio:
 
-git clone https://github.com/tuusuario/ProyectoFinalApellido.git
+git clone https://github.com/jorgelopez96/primera-preentrega-reactjs
 
-Entrar en la carpeta:
+Entrar en el proyecto:
 
-cd ProyectoFinalApellido
+cd nombre-del-proyecto
 
 Instalar dependencias:
 
@@ -80,80 +123,15 @@ npm install
 Ejecutar el proyecto:
 
 npm run dev
+🌐 Deploy
 
-Abrir en el navegador:
+El proyecto está desplegado en Vercel.
 
-http://localhost:5173
+Demo online:
 
----
+https://osidistech.vercel.app/
 
-# Configuración de Firebase
+👨‍💻 Autor
 
-El proyecto utiliza **Firebase Firestore** como base de datos.
-
-Debes crear un archivo:
-
-src/firebase/firebaseConfig.js
-
-con la configuración de tu proyecto Firebase.
-
-Ejemplo:
-
-```javascript
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
-const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_PROJECT.firebaseapp.com",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_PROJECT.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
-};
-
-const app = initializeApp(firebaseConfig);
-
-export const db = getFirestore(app);
-Colecciones en Firestore
-products
-
-Contiene los productos del catálogo.
-
-Campos utilizados:
-
-title
-description
-price
-category
-image
-stock
-orders
-
-Se genera automáticamente cuando un usuario confirma una compra.
-
-Estructura:
-
-buyer
-  name
-  email
-  phone
-  address
-
-items
-  id
-  title
-  price
-  quantity
-
-total
-createdAt
-Autor
-
-Proyecto desarrollado por
-
-Jorge Manuel López Acevedo
-
-Curso: React JS
-Plataforma: CoderHouse
-```
+Proyecto desarrollado por Jorge Lopez
+Curso de React JS
