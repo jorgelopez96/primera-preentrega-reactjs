@@ -1,4 +1,4 @@
-const products = [
+export const products = [
   // PROCESADORES (AM4 / AM5)
 
   {
@@ -11,7 +11,6 @@ const products = [
     image: "/images/products/ryzen3-4100.jpeg",
     platform: "AM4",
     stock: 30,
-    //destacados
     isBestSeller: true,
   },
   {
@@ -22,7 +21,7 @@ const products = [
     price: 180000,
     category: "procesadores",
     brand: "AMD",
-    image: "/public/images/products/ryzen5-5600.jpeg",
+    image: "/images/products/ryzen5-5600.jpeg",
     platform: "AM4",
     stock: 12,
   },
@@ -34,10 +33,9 @@ const products = [
     price: 260000,
     category: "procesadores",
     brand: "AMD",
-    image: "/public/images/products/ryzen7-5800x.jpeg",
+    image: "/images/products/ryzen7-5800x.jpeg",
     platform: "AM4",
     stock: 8,
-    //destacados
     isOffer: true,
   },
   {
@@ -48,7 +46,7 @@ const products = [
     price: 210000,
     category: "procesadores",
     brand: "AMD",
-    image: "/public/images/products/ryzen3-8300g.jpeg",
+    image: "/images/products/ryzen3-8300g.jpeg",
     platform: "AM5",
     stock: 7,
   },
@@ -60,7 +58,7 @@ const products = [
     price: 320000,
     category: "procesadores",
     brand: "AMD",
-    image: "/public/images/products/ryzen5-7600g.jpeg",
+    image: "/images/products/ryzen5-7600g.jpeg",
     platform: "AM5",
     stock: 9,
   },
@@ -71,10 +69,9 @@ const products = [
     price: 520000,
     category: "procesadores",
     brand: "AMD",
-    image: "/public/images/products/ryzen7-7800x3d.jpeg",
+    image: "/images/products/ryzen7-7800x3d.jpeg",
     platform: "AM5",
     stock: 5,
-    //destacados
     isNew: true,
   },
 
@@ -87,9 +84,8 @@ const products = [
     price: 320000,
     category: "placas-de-video",
     brand: "NVIDIA",
-    image: "/public/images/products/rtx-3050.jpeg",
+    image: "/images/products/rtx-3050.jpeg",
     stock: 15,
-    //destacados
     isBestSeller: true,
   },
   {
@@ -99,9 +95,8 @@ const products = [
     price: 420000,
     category: "placas-de-video",
     brand: "NVIDIA",
-    image: "/public/images/products/rtx-3060.jpeg",
+    image: "/images/products/rtx-3060.jpeg",
     stock: 30,
-    //destacados
     isOffer: true,
   },
   {
@@ -111,7 +106,7 @@ const products = [
     price: 520000,
     category: "placas-de-video",
     brand: "NVIDIA",
-    image: "/public/images/products/rtx-4060.jpeg",
+    image: "/images/products/rtx-4060.jpeg",
     stock: 7,
   },
   {
@@ -121,7 +116,7 @@ const products = [
     price: 650000,
     category: "placas-de-video",
     brand: "NVIDIA",
-    image: "/public/images/products/rtx-4060ti.jpg",
+    image: "/images/products/rtx-4060ti.jpg",
     stock: 5,
   },
   {
@@ -131,7 +126,7 @@ const products = [
     price: 950000,
     category: "placas-de-video",
     brand: "NVIDIA",
-    image: "/public/images/products/rtx-5070.jpg",
+    image: "/images/products/rtx-5070.jpg",
     stock: 3,
   },
   {
@@ -141,7 +136,7 @@ const products = [
     price: 1150000,
     category: "placas-de-video",
     brand: "NVIDIA",
-    image: "/public/images/products/rtx-5070ti.jpg",
+    image: "/images/products/rtx-5070ti.jpg",
     stock: 2,
   },
   {
@@ -151,9 +146,8 @@ const products = [
     price: 1550000,
     category: "placas-de-video",
     brand: "NVIDIA",
-    image: "/public/images/products/rtx-5080.jpg",
+    image: "/images/products/rtx-5080.jpg",
     stock: 3,
-    //destacados
     isNew: true,
   },
 
@@ -166,9 +160,8 @@ const products = [
     category: "memorias-ram",
     type: "DDR4",
     capacity: "8GB",
-    image: "/public/images/products/memoria-ddr4-8gb-3200mhz.jpeg",
+    image: "/images/products/memoria-ddr4-8gb-3200mhz.jpeg",
     stock: 30,
-    //destacados
     isBestSeller: true,
   },
   {
@@ -179,9 +172,8 @@ const products = [
     category: "memorias-ram",
     type: "DDR4",
     capacity: "16GB",
-    image: "/public/images/products/memoria-ddr4-16gb-3200mhz.jpeg",
+    image: "/images/products/memoria-ddr4-16gb-3200mhz.jpeg",
     stock: 15,
-    //destacados
     isOffer: true,
   },
   {
@@ -192,7 +184,7 @@ const products = [
     category: "memorias-ram",
     type: "DDR4",
     capacity: "32GB",
-    image: "/public/images/products/memoria-ddr4-32gb-3200mhz.jpeg",
+    image: "/images/products/memoria-ddr4-32gb-3200mhz.jpeg",
     stock: 10,
   },
   {
@@ -203,7 +195,7 @@ const products = [
     category: "memorias-ram",
     type: "DDR5",
     capacity: "8GB",
-    image: "/public/images/products/memoria-ddr5-8gb-5200mhz.jpeg",
+    image: "/images/products/memoria-ddr5-8gb-5200mhz.jpeg",
     stock: 12,
   },
   {
@@ -214,7 +206,7 @@ const products = [
     category: "memorias-ram",
     type: "DDR5",
     capacity: "16GB",
-    image: "/public/images/products/memoria-ddr5-16gb-5600mhz.jpeg",
+    image: "/images/products/memoria-ddr5-16gb-5600mhz.jpeg",
     stock: 12,
   },
   {
@@ -225,7 +217,7 @@ const products = [
     category: "memorias-ram",
     type: "DDR5",
     capacity: "32GB",
-    image: "/public/images/products/memoria-ddr5-32gb-5600mhz.jpeg",
+    image: "/images/products/memoria-ddr5-32gb-5600mhz.jpeg",
     stock: 8,
   },
 
@@ -238,7 +230,7 @@ const products = [
     category: "mothers",
     platform: "AM4",
     tier: "baja",
-    image: "/public/images/products/motherboard-am4-a320.jpeg",
+    image: "/images/products/motherboard-am4-a320.jpeg",
     stock: 6,
   },
   {
@@ -249,7 +241,7 @@ const products = [
     category: "mothers",
     platform: "AM4",
     tier: "alta",
-    image: "/public/images/products/motherboard-am4-x570.jpeg",
+    image: "/images/products/motherboard-am4-x570.jpeg",
     stock: 4,
   },
   {
@@ -260,7 +252,7 @@ const products = [
     category: "mothers",
     platform: "AM5",
     tier: "baja",
-    image: "/public/images/products/motherboard-am5-a620.jpeg",
+    image: "/images/products/motherboard-am5-a620.jpeg",
     stock: 5,
   },
   {
@@ -271,7 +263,7 @@ const products = [
     category: "mothers",
     platform: "AM5",
     tier: "alta",
-    image: "/public/images/products/motherboard-am5-x670e.jpeg",
+    image: "/images/products/motherboard-am5-x670e.jpeg",
     stock: 3,
   },
 
@@ -284,9 +276,8 @@ const products = [
     category: "fuentes",
     brand: "Corsair",
     wattage: 750,
-    image: "/public/images/products/fuente-corsair-750w.jpeg",
+    image: "/images/products/fuente-corsair-750w.jpeg",
     stock: 30,
-    //destacados
     isOffer: true,
   },
   {
@@ -297,9 +288,8 @@ const products = [
     category: "fuentes",
     brand: "Corsair",
     wattage: 1000,
-    image: "/public/images/products/fuente-corsair-1000w.jpeg",
+    image: "/images/products/fuente-corsair-1000w.jpeg",
     stock: 15,
-    //destacados
     isBestSeller: true,
   },
   {
@@ -310,7 +300,7 @@ const products = [
     category: "fuentes",
     brand: "Corsair",
     wattage: 1200,
-    image: "/public/images/products/fuente-corsair-1200w.jpeg",
+    image: "/images/products/fuente-corsair-1200w.jpeg",
     stock: 10,
   },
 
@@ -323,7 +313,7 @@ const products = [
     price: 190000,
     category: "gabinetes",
     brand: "Corsair",
-    image: "/public/images/products/gabinete-corsair-4000d.jpg",
+    image: "/images/products/gabinete-corsair-4000d.jpg",
     stock: 4,
   },
   {
@@ -333,9 +323,8 @@ const products = [
     price: 260000,
     category: "gabinetes",
     brand: "Corsair",
-    image: "/public/images/products/gabinete-corsair-5000d.jpg",
+    image: "/images/products/gabinete-corsair-5000d.jpg",
     stock: 10,
-    //destacados
     isNew: true,
   },
 
@@ -347,7 +336,7 @@ const products = [
     price: 45000,
     category: "discos",
     type: "SSD",
-    image: "/public/images/products/ssd-480gb.jpeg",
+    image: "/images/products/ssd-480gb.jpeg",
     stock: 10,
   },
   {
@@ -357,7 +346,7 @@ const products = [
     price: 85000,
     category: "discos",
     type: "SSD",
-    image: "/public/images/products/ssd-1tb.jpeg",
+    image: "/images/products/ssd-1tb.jpeg",
     stock: 8,
   },
   {
@@ -367,7 +356,7 @@ const products = [
     price: 65000,
     category: "discos",
     type: "M2",
-    image: "/public/images/products/m2-500gb.jpeg",
+    image: "/images/products/m2-500gb.jpeg",
     stock: 8,
   },
   {
@@ -377,7 +366,7 @@ const products = [
     price: 120000,
     category: "discos",
     type: "M2",
-    image: "/public/images/products/m2-1tb.jpeg",
+    image: "/images/products/m2-1tb.jpeg",
     stock: 6,
   },
   {
@@ -387,7 +376,7 @@ const products = [
     price: 50000,
     category: "discos",
     type: "HDD",
-    image: "/public/images/products/hdd-1tb.jpeg",
+    image: "/images/products/hdd-1tb.jpeg",
     stock: 6,
   },
   {
@@ -397,7 +386,7 @@ const products = [
     price: 78000,
     category: "discos",
     type: "HDD",
-    image: "/public/images/products/hdd-2tb.jpeg",
+    image: "/images/products/hdd-2tb.jpeg",
     stock: 5,
   },
 ];

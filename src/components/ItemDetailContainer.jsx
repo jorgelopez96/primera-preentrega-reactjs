@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../data/products";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import ItemDetail from "./ItemDetail";
 
 const ItemDetailContainer = () => {
@@ -9,11 +10,30 @@ const ItemDetailContainer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    const fetchProduct = async () => {
+      setLoading(true);
 
-    getProductById(itemId)
-      .then((res) => setItem(res ?? null))
-      .finally(() => setLoading(false));
+      try {
+        const docRef = doc(db, "products", itemId);
+        const snapshot = await getDoc(docRef);
+
+        if (snapshot.exists()) {
+          setItem({
+            id: snapshot.id,
+            ...snapshot.data(),
+          });
+        } else {
+          setItem(null);
+        }
+      } catch (error) {
+        console.error("Error cargando producto:", error);
+        setItem(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [itemId]);
 
   if (loading) return <p className="container my-4">Cargando producto...</p>;
@@ -22,7 +42,7 @@ const ItemDetailContainer = () => {
     return (
       <div className="container my-4">
         <h3>Producto no encontrado</h3>
-        <p className="text-muted">Revisá que el ID exista en products.js.</p>
+        <p className="text-muted">Revisá que el producto exista</p>
       </div>
     );
 

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useMemo, useEffect, useState } from "react";
+import { createOrder } from "../firebase/orders";
 
 const CartView = () => {
   const {
@@ -15,19 +16,17 @@ const CartView = () => {
 
   const navigate = useNavigate();
 
-  // Modal checkout
   const [show, setShow] = useState(false);
-
-  // Modal confirm vaciar
   const [confirmClear, setConfirmClear] = useState(false);
 
-  // Form state
   const [buyer, setBuyer] = useState({
     name: "",
     email: "",
     phone: "",
     address: "",
   });
+
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (cart.length === 0) {
@@ -54,22 +53,54 @@ const CartView = () => {
     setBuyer((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleConfirm = (e) => {
+  const handleConfirm = async (e) => {
     e.preventDefault();
 
-    alert(
-      `✅ Compra confirmada!\n\n` +
-        `Cliente: ${buyer.name}\n` +
-        `Email: ${buyer.email}\n` +
-        `Tel: ${buyer.phone}\n\n` +
-        `Productos: ${totalItems}\n` +
-        `Total: $${totalPrice}\n\n` +
-        `Detalle: ${itemsSummary}${cart.length > 6 ? "..." : ""}`,
-    );
+    if (!buyer.name.trim() || !buyer.email.trim() || !buyer.phone.trim()) {
+      alert("Completá nombre, email y teléfono.");
+      return;
+    }
 
-    clearCart();
-    closeModal();
-    navigate("/");
+    try {
+      setSubmitting(true);
+
+      const order = {
+        buyer: {
+          name: buyer.name.trim(),
+          email: buyer.email.trim(),
+          phone: buyer.phone.trim(),
+          address: buyer.address.trim(),
+        },
+        items: cart.map((p) => ({
+          id: p.id,
+          title: p.title,
+          price: p.price,
+          quantity: p.quantity,
+        })),
+        total: totalPrice,
+      };
+
+      const orderId = await createOrder(order);
+
+      alert(
+        `✅ Compra confirmada!\n\n` +
+          `ID de la orden: ${orderId}\n` +
+          `Cliente: ${buyer.name}\n` +
+          `Email: ${buyer.email}\n` +
+          `Tel: ${buyer.phone}\n\n` +
+          `Productos: ${totalItems}\n` +
+          `Total: $${totalPrice}\n\n` +
+          `Detalle: ${itemsSummary}${cart.length > 6 ? "..." : ""}`,
+      );
+
+      clearCart();
+      closeModal();
+      navigate("/");
+    } catch (error) {
+      alert("Ocurrió un error al generar la orden. Intentá de nuevo.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleClearConfirmed = () => {
@@ -79,7 +110,6 @@ const CartView = () => {
 
   return (
     <div className="container my-4">
-      {/* HEADER */}
       <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
         <div>
           <h2 className="mb-1">Carrito</h2>
@@ -89,7 +119,6 @@ const CartView = () => {
         </div>
 
         <div className="d-flex gap-2">
-          {/* BOTON DE VACIAR CARRITO SOLO SI HAY PRODUCTOS */}
           {cart.length > 0 && (
             <button
               type="button"
@@ -111,7 +140,6 @@ const CartView = () => {
         </div>
       </div>
 
-      {/* VACÍO */}
       {cart.length === 0 ? (
         <div className="card shadow-sm">
           <div className="card-body text-center py-5">
@@ -126,7 +154,6 @@ const CartView = () => {
         </div>
       ) : (
         <>
-          {/* TABLA */}
           <div className="card shadow-sm">
             <div className="card-body p-0">
               <div className="table-responsive">
@@ -268,7 +295,6 @@ const CartView = () => {
         </>
       )}
 
-      {/* CONFIRMAR VACIAR */}
       {confirmClear && (
         <>
           <div className="modal-backdrop fade show" />
@@ -325,7 +351,6 @@ const CartView = () => {
         </>
       )}
 
-      {/*CHECKOUT */}
       {show && cart.length > 0 && (
         <>
           <div className="modal-backdrop fade show" />
@@ -354,6 +379,7 @@ const CartView = () => {
                       className="btn-close"
                       aria-label="Close"
                       onClick={closeModal}
+                      disabled={submitting}
                     />
                   </div>
 
@@ -426,6 +452,7 @@ const CartView = () => {
                       type="button"
                       className="btn btn-outline-secondary"
                       onClick={closeModal}
+                      disabled={submitting}
                     >
                       Cancelar
                     </button>
@@ -433,8 +460,9 @@ const CartView = () => {
                     <button
                       type="submit"
                       className="btn osi-btn-search text-white"
+                      disabled={submitting}
                     >
-                      Confirmar compra
+                      {submitting ? "Generando orden..." : "Confirmar compra"}
                     </button>
                   </div>
                 </form>

@@ -1,25 +1,45 @@
 import "../assets/css/Home.css";
 import { useEffect, useMemo, useState } from "react";
-import { getProducts } from "../data/products";
 import { Link } from "react-router-dom";
 import ItemList from "./ItemList";
+
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
 const Home = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    getProducts()
-      .then((res) => setItems(res))
-      .finally(() => setLoading(false));
+    const fetchProducts = async () => {
+      setLoading(true);
+
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+
+        const products = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setItems(products);
+      } catch (error) {
+        console.error("Error cargando productos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   const offers = useMemo(
     () => items.filter((p) => p.isOffer).slice(0, 8),
     [items],
   );
+
   const news = useMemo(() => items.filter((p) => p.isNew).slice(0, 6), [items]);
+
   const best = useMemo(
     () => items.filter((p) => p.isBestSeller).slice(0, 8),
     [items],
@@ -56,20 +76,20 @@ const Home = () => {
         </div>
       </section>
 
+      {/* OFERTAS */}
       <section className="container my-4">
         <div className="d-flex align-items-center mb-2">
           <h3 className="mb-0">Ofertas</h3>
         </div>
 
         {offers.length === 0 ? (
-          <p className="text-muted">
-            Marcá algunos productos con <b>isOffer: true</b> en products.js
-          </p>
+          <p className="text-muted">No hay ofertas disponibles.</p>
         ) : (
           <ItemList items={offers} />
         )}
       </section>
 
+      {/* NUEVOS */}
       <section className="container my-4">
         <div className="d-flex align-items-center justify-content-between mb-3">
           <div>
@@ -85,9 +105,7 @@ const Home = () => {
         </div>
 
         {news.length === 0 ? (
-          <p className="text-muted">
-            Marcá algunos productos con <b>isNew: true</b> en products.js
-          </p>
+          <p className="text-muted">No hay productos nuevos.</p>
         ) : (
           <div
             id="newCarousel"
@@ -103,8 +121,6 @@ const Home = () => {
                   data-bs-target="#newCarousel"
                   data-bs-slide-to={idx}
                   className={idx === 0 ? "active" : ""}
-                  aria-current={idx === 0 ? "true" : "false"}
-                  aria-label={`Slide ${idx + 1}`}
                 />
               ))}
             </div>
@@ -169,39 +185,18 @@ const Home = () => {
                 </div>
               ))}
             </div>
-
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#newCarousel"
-              data-bs-slide="prev"
-            >
-              <span className="carousel-control-prev-icon" aria-hidden="true" />
-              <span className="visually-hidden">Anterior</span>
-            </button>
-
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#newCarousel"
-              data-bs-slide="next"
-            >
-              <span className="carousel-control-next-icon" aria-hidden="true" />
-              <span className="visually-hidden">Siguiente</span>
-            </button>
           </div>
         )}
       </section>
 
+      {/* MÁS VENDIDOS */}
       <section className="container my-4">
         <div className="d-flex align-items-center mb-2">
           <h3 className="mb-0">Más vendido</h3>
         </div>
 
         {best.length === 0 ? (
-          <p className="text-muted">
-            Marcá algunos productos con <b>isBestSeller: true</b> en products.js
-          </p>
+          <p className="text-muted">No hay productos destacados.</p>
         ) : (
           <ItemList items={best} />
         )}

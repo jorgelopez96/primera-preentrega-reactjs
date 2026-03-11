@@ -1,8 +1,9 @@
 import "../assets/css/NavBar.css";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import CartWidget from "./CartWidget";
-import { searchProducts } from "../data/products";
 
 const NavBar = () => {
   const [term, setTerm] = useState("");
@@ -21,18 +22,41 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    const q = term.trim();
-    if (!q) {
-      setSuggestions([]);
-      setOpenSug(false);
-      return;
-    }
+    const fetchSuggestions = async () => {
+      const q = term.trim().toLowerCase();
+
+      if (!q) {
+        setSuggestions([]);
+        setOpenSug(false);
+        return;
+      }
+
+      try {
+        const snapshot = await getDocs(collection(db, "products"));
+
+        const allProducts = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        const filtered = allProducts.filter((p) => {
+          const haystack =
+            `${p.title} ${p.description} ${p.category} ${p.brand ?? ""} ${p.platform ?? ""}`.toLowerCase();
+
+          return haystack.includes(q);
+        });
+
+        setSuggestions(filtered.slice(0, 6));
+        setOpenSug(true);
+      } catch (error) {
+        console.error("Error cargando sugerencias:", error);
+        setSuggestions([]);
+        setOpenSug(false);
+      }
+    };
 
     const t = setTimeout(() => {
-      searchProducts(q).then((res) => {
-        setSuggestions(res.slice(0, 6));
-        setOpenSug(true);
-      });
+      fetchSuggestions();
     }, 250);
 
     return () => clearTimeout(t);
@@ -44,6 +68,7 @@ const NavBar = () => {
         setOpenSug(false);
       }
     };
+
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
@@ -127,7 +152,6 @@ const NavBar = () => {
             </li>
           </ul>
 
-          {/* Buscador */}
           <div className="nav-search-wrap me-lg-3 mb-2 mb-lg-0" ref={boxRef}>
             <form className="d-flex" onSubmit={onSubmit} autoComplete="off">
               <input
@@ -154,7 +178,6 @@ const NavBar = () => {
                     type="button"
                     onClick={() => goToItem(p.id)}
                   >
-                    {/* Miniatura en el buscador*/}
                     <div className="nav-suggestion__thumb">
                       {p.image ? (
                         <img src={p.image} alt={p.title} />
@@ -165,7 +188,6 @@ const NavBar = () => {
                       )}
                     </div>
 
-                    {/* Texto */}
                     <div className="nav-suggestion__content">
                       <div className="nav-suggestion__title">{p.title}</div>
                       <div className="nav-suggestion__meta">

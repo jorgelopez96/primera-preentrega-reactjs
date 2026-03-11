@@ -1,14 +1,18 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { useCart } from "../context/CartContext";
 
 const ItemDetail = ({ item }) => {
   const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
 
   const handleAdd = (qty) => {
     addItem(item, qty);
+    setAdded(true);
   };
 
-  const stock = item.stock ?? 0; // stock 
+  const stock = item.stock ?? 0;
 
   return (
     <div className="container my-4">
@@ -45,13 +49,26 @@ const ItemDetail = ({ item }) => {
 
           <hr />
 
-          <p className="mb-2 fw-semibold">Seleccioná cantidad:</p>
+          {!added ? (
+            <>
+              <p className="mb-2 fw-semibold">Seleccioná cantidad:</p>
 
-          <div className="d-inline-block">
-            <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
-          </div>
+              <div className="d-inline-block">
+                <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
+              </div>
+            </>
+          ) : (
+            <div className="mt-3 d-flex gap-2">
+              <Link to="/cart" className="btn btn-success">
+                Ir al carrito
+              </Link>
 
-          {/* Stock visible */}
+              <Link to="/" className="btn btn-outline-secondary">
+                Seguir comprando
+              </Link>
+            </div>
+          )}
+
           <p className="text-muted small mt-2 mb-0">
             Stock disponible: <b>{stock}</b>
           </p>

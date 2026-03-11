@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ItemList from "./ItemList";
-import { getProducts, getProductsByCategory } from "../data/products";
+
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
 const ItemListContainer = ({ greeting }) => {
   const [items, setItems] = useState([]);
@@ -12,13 +14,32 @@ const ItemListContainer = ({ greeting }) => {
   const { categoryId } = useParams();
 
   useEffect(() => {
-    setLoading(true);
+    const fetchProducts = async () => {
+      setLoading(true);
 
-    const fetchData = categoryId
-      ? getProductsByCategory(categoryId)
-      : getProducts();
+      try {
+        const productsRef = collection(db, "products");
 
-    fetchData.then((res) => setItems(res)).finally(() => setLoading(false));
+        const q = categoryId
+          ? query(productsRef, where("category", "==", categoryId))
+          : productsRef;
+
+        const snapshot = await getDocs(q);
+
+        const products = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setItems(products);
+      } catch (error) {
+        console.error("Error cargando productos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, [categoryId]);
 
   return (

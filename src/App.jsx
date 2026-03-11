@@ -39,7 +39,7 @@ function App() {
           {/* CARRITO */}
           <Route path="/cart" element={<CartView />} />
 
-          {/* 404 SIEMPRE ÚLTIMA */}
+          {/* 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
