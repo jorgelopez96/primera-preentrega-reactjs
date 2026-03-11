@@ -98,6 +98,7 @@ const CartView = () => {
           title: p.title,
           price: p.price,
           quantity: p.quantity,
+          image: p.image ?? "",
         })),
         total: totalPrice,
       };
@@ -111,12 +112,20 @@ const CartView = () => {
         message: `ID de orden: ${orderId}`,
       });
 
+      const successData = {
+        orderId,
+        buyer: order.buyer,
+        items: order.items,
+        total: order.total,
+        totalItems,
+      };
+
       clearCart();
       closeModal();
 
       setTimeout(() => {
-        navigate("/");
-      }, 3000);
+        navigate("/checkout-success", { state: successData });
+      }, 2500);
     } catch (error) {
       setToast({
         show: true,
