@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB3c2UNSsDHSPXvNpLDQGLu-Sb3mRVd2FU",
-  authDomain: "osidistech-ecommerce.firebaseapp.com",
-  projectId: "osidistech-ecommerce",
-  storageBucket: "osidistech-ecommerce.firebasestorage.app",
-  messagingSenderId: "1000708916431",
-  appId: "1:1000708916431:web:9d869e2526201df3b3a3ba",
-  measurementId: "G-9HVMVGQMMF",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
