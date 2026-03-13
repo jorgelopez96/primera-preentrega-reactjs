@@ -1,137 +1,181 @@
-🖥️ OSIDISTECH – Hardware Store
+# 🖥️ OSIDISTECH – Hardware Store
 
 Tienda online de hardware desarrollada con React, donde los usuarios pueden navegar productos, filtrarlos por categorías, buscarlos, agregarlos al carrito y finalizar la compra generando una orden almacenada en Firebase Firestore.
 
-🔗 Demo online:
-https://osidistech.vercel.app/
+🔗 **Demo online:** https://osidistech.vercel.app/
 
-📦 Características principales
+---
 
-Catálogo de productos
+## 📸 Capturas de pantalla
 
-Navegación por categorías
+### Home
 
-Buscador de productos
+![Home](docs/screenshots/home.png)
 
-Página de detalle del producto
+### Catálogo por categoría
 
-Carrito de compras
+![Catálogo](docs/screenshots/catalogo.png)
 
-Modificación de cantidades en el carrito
+### Detalle de producto
 
-Validación de stock
+![Detalle](docs/screenshots/detalle.png)
 
-Formulario de checkout
+### Carrito
 
-Generación de orden de compra
+![Carrito](docs/screenshots/carrito.png)
 
-Almacenamiento de órdenes en Firebase Firestore
+### Procesando compra
 
-Página de compra exitosa con resumen
+![Checkout Processing](docs/screenshots/checkout-processing.png)
 
-Notificaciones Toast
+### Compra exitosa
 
-Deploy en Vercel
+![Checkout Success](docs/screenshots/checkout-success.png)
 
-🛠️ Tecnologías utilizadas
+---
 
-React
+## 📦 Características principales
 
-React Router DOM
+- Catálogo de productos
+- Navegación por categorías
+- Buscador de productos con sugerencias en tiempo real
+- Página de detalle del producto
+- Carrito de compras con modificación de cantidades
+- Validación de stock
+- Formulario de checkout con validación de campos
+- Generación de orden de compra en Firebase Firestore
+- Página de compra exitosa con resumen
+- Notificaciones Toast
+- Deploy en Vercel
 
-Firebase Firestore
+---
 
-Bootstrap 5
+## 🛠️ Tecnologías y librerías utilizadas
 
-Vite
+- [React 18](https://react.dev/)
+- [React Router DOM v6](https://reactrouter.com/)
+- [Firebase / Firestore](https://firebase.google.com/)
+- [Bootstrap 5](https://getbootstrap.com/)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+- [Vite](https://vitejs.dev/)
+- JavaScript ES6+
 
-JavaScript (ES6+)
+---
 
-📂 Estructura del proyecto
+## ⚙️ Variables de entorno
+
+El proyecto usa variables de entorno para las credenciales de Firebase. Antes de correr el proyecto localmente, creá un archivo `.env` en la raíz con las siguientes variables (ver `.env.example`):
+
+```
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+VITE_FIREBASE_MEASUREMENT_ID=
+```
+
+---
+
+## 📂 Estructura del proyecto
+
+```
 src
 ┣ components
 ┃ ┣ CartView.jsx
+┃ ┣ CartWidget.jsx
 ┃ ┣ Categories.jsx
+┃ ┣ CheckoutProcessing.jsx
 ┃ ┣ CheckoutSuccess.jsx
+┃ ┣ Footer.jsx
 ┃ ┣ Home.jsx
+┃ ┣ ItemCard.jsx
+┃ ┣ ItemCount.jsx
 ┃ ┣ ItemDetail.jsx
 ┃ ┣ ItemDetailContainer.jsx
 ┃ ┣ ItemList.jsx
 ┃ ┣ ItemListContainer.jsx
 ┃ ┣ NavBar.jsx
+┃ ┣ NotFound.jsx
 ┃ ┣ SearchResultsContainer.jsx
 ┃ ┗ Footer.jsx
-┃
 ┣ context
 ┃ ┗ CartContext.jsx
-┃
 ┣ firebase
 ┃ ┣ firebaseConfig.js
 ┃ ┣ firestore.js
 ┃ ┗ orders.js
-┃
+┣ utils
+┃ ┗ formatPrice.js
 ┣ assets
 ┃ ┣ css
-┃ ┗ images
-┃
+┃ ┗ categories
 ┗ App.jsx
+```
 
-🛒 Flujo de compra
+---
 
-1️⃣ El usuario navega por los productos
-2️⃣ Puede filtrar por categorías o buscar productos
-3️⃣ Agrega productos al carrito
-4️⃣ Modifica cantidades o elimina productos
-5️⃣ Completa el formulario de compra
-6️⃣ Se genera una orden en Firebase Firestore
-7️⃣ Se muestra una pantalla con el resumen de la compra
+## 🛒 Flujo de compra
 
-🔥 Firebase
+1. El usuario navega por los productos
+2. Puede filtrar por categorías o buscar productos
+3. Agrega productos al carrito
+4. Modifica cantidades o elimina productos
+5. Completa el formulario de compra
+6. Se genera una orden en Firebase Firestore
+7. Se muestra una pantalla de procesamiento
+8. Se muestra el resumen final de la compra
 
-Las órdenes de compra se almacenan en Cloud Firestore dentro de la colección:
+---
 
-orders
+## 🔥 Firebase
 
-Cada orden contiene:
+Las órdenes de compra se almacenan en Cloud Firestore dentro de la colección `orders`. Cada orden contiene datos del comprador, productos comprados, cantidades, precios, total y fecha.
 
-Datos del comprador
+---
 
-Productos comprados
-
-Cantidad
-
-Precio
-
-Total de la compra
-
-Fecha
-
-🚀 Instalación local
+## 🚀 Instalación local
 
 Clonar el repositorio:
 
+```bash
 git clone https://github.com/jorgelopez96/primera-preentrega-reactjs
+```
 
 Entrar en el proyecto:
 
-cd nombre-del-proyecto
+```bash
+cd osidistech-coder
+```
 
 Instalar dependencias:
 
+```bash
 npm install
+```
+
+Configurar variables de entorno:
+
+```bash
+cp .env.example .env
+# Completar los valores en el archivo .env
+```
 
 Ejecutar el proyecto:
 
+```bash
 npm run dev
-🌐 Deploy
+```
 
-El proyecto está desplegado en Vercel.
+---
 
-Demo online:
+## 🌐 Deploy
 
-https://osidistech.vercel.app/
+El proyecto está desplegado en Vercel: https://osidistech.vercel.app/
 
-👨‍💻 Autor
+---
 
-Proyecto desarrollado por Jorge Lopez
-Curso de React JS
+## 👨‍💻 Autor
+
+Proyecto desarrollado por Jorge Lopez — Curso de React JS en CoderHouse
