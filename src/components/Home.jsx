@@ -23,8 +23,8 @@ const Home = () => {
         }));
 
         setItems(products);
-      } catch (error) {
-        console.error("Error cargando productos:", error);
+      } catch {
+        // Error cargando productos
       } finally {
         setLoading(false);
       }

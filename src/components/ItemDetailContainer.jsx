@@ -25,8 +25,8 @@ const ItemDetailContainer = () => {
         } else {
           setItem(null);
         }
-      } catch (error) {
-        console.error("Error cargando producto:", error);
+      } catch {
+        // Error cargando producto
         setItem(null);
       } finally {
         setLoading(false);

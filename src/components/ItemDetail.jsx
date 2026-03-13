@@ -49,10 +49,13 @@ const ItemDetail = ({ item }) => {
 
           <hr />
 
-          {!added ? (
+          {stock === 0 ? (
+            <div className="alert alert-warning mb-0" role="alert">
+              Este producto está <b>sin stock</b> por el momento.
+            </div>
+          ) : !added ? (
             <>
               <p className="mb-2 fw-semibold">Seleccioná cantidad:</p>
-
               <div className="d-inline-block">
                 <ItemCount initial={1} stock={stock} onAdd={handleAdd} />
               </div>
@@ -62,7 +65,6 @@ const ItemDetail = ({ item }) => {
               <Link to="/cart" className="btn btn-success">
                 Ir al carrito
               </Link>
-
               <Link to="/" className="btn btn-outline-secondary">
                 Seguir comprando
               </Link>
@@ -72,12 +74,6 @@ const ItemDetail = ({ item }) => {
           <p className="text-muted small mt-2 mb-0">
             Stock disponible: <b>{stock}</b>
           </p>
-
-          {stock === 0 && (
-            <div className="alert alert-warning mt-3 mb-0" role="alert">
-              Este producto está <b>sin stock</b> por el momento.
-            </div>
-          )}
         </div>
       </div>
     </div>

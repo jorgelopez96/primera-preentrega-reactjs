@@ -18,6 +18,7 @@ const NavBar = () => {
     const q = term.trim();
     if (!q) return;
     navigate(`/search?q=${encodeURIComponent(q)}`);
+    setTerm("");
     setOpenSug(false);
   };
 
@@ -48,8 +49,8 @@ const NavBar = () => {
 
         setSuggestions(filtered.slice(0, 6));
         setOpenSug(true);
-      } catch (error) {
-        console.error("Error cargando sugerencias:", error);
+      } catch {
+        // Error cargando sugerencias
         setSuggestions([]);
         setOpenSug(false);
       }

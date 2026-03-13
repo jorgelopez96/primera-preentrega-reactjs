@@ -64,8 +64,8 @@ const SearchResultsContainer = () => {
         }
 
         setItems(filteredProducts);
-      } catch (error) {
-        console.error("Error buscando productos:", error);
+      } catch {
+        // Error buscando productos
         setItems([]);
       } finally {
         setLoading(false);
@@ -77,9 +77,9 @@ const SearchResultsContainer = () => {
 
   if (!q) {
     return (
-      <section style={{ padding: "2rem" }}>
+      <section className="container my-4">
         <h2>Buscador</h2>
-        <p>
+        <p className="text-muted">
           Ingresá un término para buscar productos (ej: ryzen, corsair, ddr5).
         </p>
       </section>
@@ -87,7 +87,7 @@ const SearchResultsContainer = () => {
   }
 
   return (
-    <section style={{ padding: "2rem" }}>
+    <section className="container my-4">
       <h2>
         Resultados para: "{q}" {!loading && `(${items.length})`}
       </h2>
@@ -95,7 +95,7 @@ const SearchResultsContainer = () => {
       {loading ? (
         <p>Buscando...</p>
       ) : items.length === 0 ? (
-        <p>No se encontraron productos.</p>
+        <p className="text-muted">No se encontraron productos.</p>
       ) : (
         <ItemList items={items} />
       )}

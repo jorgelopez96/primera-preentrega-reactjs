@@ -7,7 +7,7 @@ import ItemList from "./ItemList";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = ({ greeting = "Catálogo" }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,8 +32,8 @@ const ItemListContainer = ({ greeting }) => {
         }));
 
         setItems(products);
-      } catch (error) {
-        console.error("Error cargando productos:", error);
+      } catch {
+        // Error cargando productos
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,13 @@ const ItemListContainer = ({ greeting }) => {
     <section className="item-list-container">
       <h2>{greeting}</h2>
 
-      {loading ? <p>Cargando productos...</p> : <ItemList items={items} />}
+      {loading ? (
+        <p>Cargando productos...</p>
+      ) : items.length === 0 ? (
+        <p className="text-muted">No hay productos en esta categoría.</p>
+      ) : (
+        <ItemList items={items} />
+      )}
     </section>
   );
 };

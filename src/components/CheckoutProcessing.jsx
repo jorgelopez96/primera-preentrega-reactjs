@@ -6,12 +6,19 @@ const CheckoutProcessing = () => {
   const { state } = useLocation();
 
   useEffect(() => {
+    if (!state) {
+      navigate("/");
+      return;
+    }
+
     const timer = setTimeout(() => {
       navigate("/checkout-success", { state });
     }, 2200);
 
     return () => clearTimeout(timer);
   }, [navigate, state]);
+
+  if (!state) return null;
 
   return (
     <div

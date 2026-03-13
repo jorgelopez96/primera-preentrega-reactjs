@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useMemo, useEffect, useState } from "react";
-import { createOrder } from "../firebase/orders";
+import { createOrder } from "../firebase/order";
 
 const CartView = () => {
   const {
