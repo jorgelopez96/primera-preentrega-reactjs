@@ -140,7 +140,7 @@ Las órdenes de compra se almacenan en Cloud Firestore dentro de la colección `
 Clonar el repositorio:
 
 ```bash
-git clone https://github.com/jorgelopez96/primera-preentrega-reactjs
+git clone https://github.com/jorgelopez96/OsidisTech-Ecommerce
 ```
 
 Entrar en el proyecto:
