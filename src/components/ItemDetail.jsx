@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { useCart } from "../context/CartContext";
+import { formatPrice } from "../utils/formatPrice";
 
 const ItemDetail = ({ item }) => {
   const { addItem } = useCart();
@@ -45,7 +46,7 @@ const ItemDetail = ({ item }) => {
           <h2 className="mb-2">{item.title}</h2>
           <p className="text-muted">{item.description}</p>
 
-          <p className="fs-4 fw-bold mb-2">${item.price}</p>
+          <p className="fs-4 fw-bold mb-2">{formatPrice(item.price)}</p>
 
           <hr />
 

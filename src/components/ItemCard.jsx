@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
+import { formatPrice } from "../utils/formatPrice";
 
 const ItemCard = ({ item }) => {
   return (
     <div className="card h-100 shadow-sm">
-      {/* Imagen */}
       {item.image ? (
         <img
           src={item.image}
@@ -29,7 +29,7 @@ const ItemCard = ({ item }) => {
           {item.description}
         </p>
 
-        <p className="fw-bold mb-3">${item.price}</p>
+        <p className="fw-bold mb-3">{formatPrice(item.price)}</p>
 
         <Link
           to={`/item/${item.id}`}

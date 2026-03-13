@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useMemo, useEffect, useState } from "react";
-import { createOrder } from "../firebase/order";
+import { createOrder } from "../firebase/orders";
+import { formatPrice } from "../utils/formatPrice";
 
 const CartView = () => {
   const {
@@ -114,13 +115,12 @@ const CartView = () => {
       };
 
       closeModal();
-
       navigate("/checkout-processing", { state: successData });
 
       setTimeout(() => {
         clearCart();
       }, 0);
-    } catch (error) {
+    } catch {
       setToast({
         show: true,
         type: "danger",
@@ -143,7 +143,7 @@ const CartView = () => {
         <div>
           <h2 className="mb-1">Carrito</h2>
           <p className="text-muted mb-0">
-            {totalItems} ítem(s) · Total: <b>${totalPrice}</b>
+            {totalItems} ítem(s) · Total: <b>{formatPrice(totalPrice)}</b>
           </p>
         </div>
 
@@ -250,7 +250,7 @@ const CartView = () => {
                             </div>
                           </td>
 
-                          <td>${p.price}</td>
+                          <td>{formatPrice(p.price)}</td>
 
                           <td>
                             <div className="d-flex align-items-center gap-2">
@@ -286,7 +286,9 @@ const CartView = () => {
                             )}
                           </td>
 
-                          <td className="fw-bold">${p.price * p.quantity}</td>
+                          <td className="fw-bold">
+                            {formatPrice(p.price * p.quantity)}
+                          </td>
 
                           <td>
                             <button
@@ -307,7 +309,7 @@ const CartView = () => {
                       <td colSpan={4} className="text-end fw-semibold">
                         Total:
                       </td>
-                      <td className="fw-bold">${totalPrice}</td>
+                      <td className="fw-bold">{formatPrice(totalPrice)}</td>
                       <td />
                     </tr>
                   </tfoot>
@@ -399,7 +401,7 @@ const CartView = () => {
                       <h5 className="modal-title mb-1">Finalizar compra</h5>
                       <div className="text-muted small">
                         Vas a comprar <b>{totalItems}</b> producto(s) por{" "}
-                        <b>${totalPrice}</b>
+                        <b>{formatPrice(totalPrice)}</b>
                       </div>
                     </div>
 

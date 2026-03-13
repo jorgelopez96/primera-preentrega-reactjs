@@ -1,4 +1,5 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
+import { formatPrice } from "../utils/formatPrice";
 
 const CheckoutSuccess = () => {
   const { state } = useLocation();
@@ -66,7 +67,7 @@ const CheckoutSuccess = () => {
                         </div>
 
                         <div className="fw-semibold">
-                          ${item.price * item.quantity}
+                          {formatPrice(item.price * item.quantity)}
                         </div>
                       </div>
                     ))}
@@ -79,7 +80,7 @@ const CheckoutSuccess = () => {
 
                   <div className="d-flex justify-content-between mt-2 fs-5">
                     <span className="fw-bold">Total:</span>
-                    <span className="fw-bold">${total}</span>
+                    <span className="fw-bold">{formatPrice(total)}</span>
                   </div>
                 </div>
               </div>

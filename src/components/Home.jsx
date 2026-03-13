@@ -2,6 +2,7 @@ import "../assets/css/Home.css";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import ItemList from "./ItemList";
+import { formatPrice } from "../utils/formatPrice";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
@@ -168,7 +169,9 @@ const Home = () => {
                             </p>
 
                             <div className="d-flex align-items-center justify-content-between mt-2">
-                              <div className="osi-new-price">${p.price}</div>
+                              <div className="osi-new-price">
+                                {formatPrice(p.price)}
+                              </div>
 
                               <Link
                                 className="btn osi-btn-search text-white"
