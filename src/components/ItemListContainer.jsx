@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ItemList from "./ItemList";
+import { products as localProducts } from "../data/products";
 
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
@@ -26,14 +27,24 @@ const ItemListContainer = ({ greeting = "Catálogo" }) => {
 
         const snapshot = await getDocs(q);
 
-        const products = snapshot.docs.map((doc) => ({
+        const firestoreProducts = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        setItems(products);
+        if (firestoreProducts.length > 0) {
+          setItems(firestoreProducts);
+        } else {
+          const fallback = categoryId
+            ? localProducts.filter((p) => p.category === categoryId)
+            : localProducts;
+          setItems(fallback);
+        }
       } catch {
-        // Error cargando productos
+        const fallback = categoryId
+          ? localProducts.filter((p) => p.category === categoryId)
+          : localProducts;
+        setItems(fallback);
       } finally {
         setLoading(false);
       }

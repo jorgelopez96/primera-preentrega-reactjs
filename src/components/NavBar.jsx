@@ -3,6 +3,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
+import { products as localProducts } from "../data/products";
 import CartWidget from "./CartWidget";
 
 const NavBar = () => {
@@ -35,24 +36,29 @@ const NavBar = () => {
       try {
         const snapshot = await getDocs(collection(db, "products"));
 
-        const allProducts = snapshot.docs.map((doc) => ({
+        let allProducts = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
+        if (allProducts.length === 0) allProducts = localProducts;
+
         const filtered = allProducts.filter((p) => {
           const haystack =
             `${p.title} ${p.description} ${p.category} ${p.brand ?? ""} ${p.platform ?? ""}`.toLowerCase();
-
           return haystack.includes(q);
         });
 
         setSuggestions(filtered.slice(0, 6));
         setOpenSug(true);
       } catch {
-        // Error cargando sugerencias
-        setSuggestions([]);
-        setOpenSug(false);
+        const filtered = localProducts.filter((p) => {
+          const haystack =
+            `${p.title} ${p.description} ${p.category} ${p.brand ?? ""} ${p.platform ?? ""}`.toLowerCase();
+          return haystack.includes(q);
+        });
+        setSuggestions(filtered.slice(0, 6));
+        setOpenSug(filtered.length > 0);
       }
     };
 
@@ -86,7 +92,6 @@ const NavBar = () => {
       <div className="container-fluid">
         <Link className="navbar-brand osi-brand text-decoration-none" to="/">
           <img src="/favicon.png" alt="OSIDISTECH" className="osi-logo" />
-
           <div>
             <div className="osi-brand-name">OSIDISTECH</div>
             <div className="osi-brand-sub">Hardware Store</div>
@@ -188,7 +193,6 @@ const NavBar = () => {
                         </span>
                       )}
                     </div>
-
                     <div className="nav-suggestion__content">
                       <div className="nav-suggestion__title">{p.title}</div>
                       <div className="nav-suggestion__meta">

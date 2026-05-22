@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import ItemList from "./ItemList";
 import { formatPrice } from "../utils/formatPrice";
+import { products } from "../data/products";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
@@ -18,14 +19,14 @@ const Home = () => {
       try {
         const querySnapshot = await getDocs(collection(db, "products"));
 
-        const products = querySnapshot.docs.map((doc) => ({
+        const firestoreProducts = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        setItems(products);
+        setItems(firestoreProducts.length > 0 ? firestoreProducts : products);
       } catch {
-        // Error cargando productos
+        setItems(products);
       } finally {
         setLoading(false);
       }

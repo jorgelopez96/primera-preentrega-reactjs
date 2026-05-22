@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
+import { products as localProducts } from "../data/products";
 import ItemDetail from "./ItemDetail";
 
 const ItemDetailContainer = () => {
@@ -23,11 +24,12 @@ const ItemDetailContainer = () => {
             ...snapshot.data(),
           });
         } else {
-          setItem(null);
+          const localProduct = localProducts.find((p) => p.id === itemId);
+          setItem(localProduct || null);
         }
       } catch {
-        // Error cargando producto
-        setItem(null);
+        const localProduct = localProducts.find((p) => p.id === itemId);
+        setItem(localProduct || null);
       } finally {
         setLoading(false);
       }

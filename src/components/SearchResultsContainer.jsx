@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
+import { products as localProducts } from "../data/products";
 import ItemList from "./ItemList";
 
 const SearchResultsContainer = () => {
@@ -24,27 +25,29 @@ const SearchResultsContainer = () => {
       try {
         const snapshot = await getDocs(collection(db, "products"));
 
-        const allProducts = snapshot.docs.map((doc) => ({
+        let allProducts = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        const isNewQuery =
-          q === "nuevo" ||
-          q === "nuevos" ||
-          q === "lanzamiento" ||
-          q === "lanzamientos";
+        if (allProducts.length === 0) allProducts = localProducts;
 
-        const isOfferQuery = q === "oferta" || q === "ofertas";
-
-        const isBestQuery =
-          q === "best" ||
-          q === "top" ||
-          q === "bestseller" ||
-          q === "mas vendido" ||
-          q === "más vendido" ||
-          q === "mas vendidos" ||
-          q === "más vendidos";
+        const isNewQuery = [
+          "nuevo",
+          "nuevos",
+          "lanzamiento",
+          "lanzamientos",
+        ].includes(q);
+        const isOfferQuery = ["oferta", "ofertas"].includes(q);
+        const isBestQuery = [
+          "best",
+          "top",
+          "bestseller",
+          "mas vendido",
+          "más vendido",
+          "mas vendidos",
+          "más vendidos",
+        ].includes(q);
 
         let filteredProducts = [];
 
@@ -58,15 +61,43 @@ const SearchResultsContainer = () => {
           filteredProducts = allProducts.filter((p) => {
             const haystack =
               `${p.title} ${p.description} ${p.category} ${p.brand ?? ""} ${p.platform ?? ""}`.toLowerCase();
-
             return haystack.includes(q);
           });
         }
 
         setItems(filteredProducts);
       } catch {
-        // Error buscando productos
-        setItems([]);
+        const isNewQuery = [
+          "nuevo",
+          "nuevos",
+          "lanzamiento",
+          "lanzamientos",
+        ].includes(q);
+        const isOfferQuery = ["oferta", "ofertas"].includes(q);
+        const isBestQuery = [
+          "best",
+          "top",
+          "bestseller",
+          "mas vendido",
+          "más vendido",
+          "mas vendidos",
+          "más vendidos",
+        ].includes(q);
+
+        let filteredProducts = [];
+        if (isNewQuery) filteredProducts = localProducts.filter((p) => p.isNew);
+        else if (isOfferQuery)
+          filteredProducts = localProducts.filter((p) => p.isOffer);
+        else if (isBestQuery)
+          filteredProducts = localProducts.filter((p) => p.isBestSeller);
+        else
+          filteredProducts = localProducts.filter((p) => {
+            const haystack =
+              `${p.title} ${p.description} ${p.category} ${p.brand ?? ""} ${p.platform ?? ""}`.toLowerCase();
+            return haystack.includes(q);
+          });
+
+        setItems(filteredProducts);
       } finally {
         setLoading(false);
       }
